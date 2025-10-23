@@ -22,8 +22,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // val barCodeScanner=BarCodeScanner(this)
-       // barCodeScanner.startScanner{result -> Log.i(TAG,result?:"Null")}
+
 
         val apiFindProduct=ApiFindProduct(this)
         apiFindProduct.loadProduct()
