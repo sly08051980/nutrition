@@ -37,15 +37,15 @@ class ApiFindProduct(val context: Context) {
                     val n=p?.nutriments
 
                     Log.i(TAG3,
-                        "produit=${p?.product_name}, marque=${p?.brands}" +
+                        //"produit=${p?.product_name}, marque=${p?.brands}" +
                                 ",nom complet=${p?.abbreviated_product_name_fr}"+
                                 "Type d allergie=${p?.allergens_from_ingredients}"+
-                                "Allergie =${p?.allergens_from_user}"+"Type de plat =${p?.categories_old}"+
+                                //"Allergie =${p?.allergens_from_user}"+"Type de plat =${p?.categories_old}"+
                                 "Conservation =${p?.conservation_conditions_fr}"+
                                 "Fabrication = ${p?.countries_imported}"+
                                 "Image = ${p?.image_front_url}"
                                 +"ingredient=${p?.ingredients_text_fr}" +
-                                "nutriscrore=${p?.labels}"+
+                                "nutriscrore=${p?.nutrition_grade_fr}"+
                                 "glucides pour 100 g=${n?.carbohydrates_100g}g"+
                                 "calories=${n?.energy_kcal_100g}"+
                                 "Kjoule = ${n?.energy_kj_100g}"+

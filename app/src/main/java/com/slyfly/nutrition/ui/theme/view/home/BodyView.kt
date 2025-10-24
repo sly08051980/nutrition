@@ -1,5 +1,6 @@
 package com.slyfly.nutrition.ui.theme.view.home
 
+import ResultScannerViewModel
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,11 +30,14 @@ import androidx.compose.ui.text.style.TextAlign
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.slyfly.nutrition.data.remote.DataItemBody
+import com.slyfly.nutrition.ui.theme.view.View
 
 
 @Composable
-fun BodyView(modifier: Modifier=Modifier) {
+fun BodyView(modifier: Modifier=Modifier, navController: NavHostController,
+             vm: ResultScannerViewModel) {
     //pour passer le context
     val context = LocalContext.current
     LazyVerticalGrid(
@@ -44,7 +48,13 @@ fun BodyView(modifier: Modifier=Modifier) {
     ) {items(
         DataItemBody(context).allItemBody()){itemBody->
         Surface {
-            OutlinedCard(onClick ={ itemBody.onClick?.invoke() } ,
+            OutlinedCard(onClick ={ if(itemBody.name=="Scanner"){
+            vm.scanAndFetchProduct(context){
+                navController.navigate(View.ScannerResult.title)
+            }}else{
+                itemBody.onClick?.invoke()
+            }
+            } ,
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                 ),
@@ -74,9 +84,5 @@ fun BodyView(modifier: Modifier=Modifier) {
     }
 
 }
-@Preview(showBackground = true)
-@Composable
-fun greet(){
-    BodyView(modifier = Modifier)
 
-}
+

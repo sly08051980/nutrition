@@ -74,5 +74,5 @@ dependencies {
     implementation ("io.coil-kt:coil-compose:2.4.0")
 
     //navigation entre les pages
-    implementation ("androidx.navigation:navigation-compose:2.9.5")
+    implementation (libs.androidx.navigation.compose)
 }

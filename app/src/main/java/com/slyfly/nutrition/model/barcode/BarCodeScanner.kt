@@ -26,6 +26,7 @@ private val TAG:String = "CHECK_RESPONSE_SCANNER"
 
                 Log.i(TAG, onResult(value?:"null").toString())
                 onResult(value)
+
             }
             .addOnCanceledListener {
                 onResult(null)
