@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.ui.theme.view
+package com.slyfly.nutrition.ui.theme.view.home
 
 
 
@@ -43,7 +43,7 @@ val gradient= Brush.verticalGradient(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
-fun AppBar() {
+fun AppBarView() {
     Box{
         CenterAlignedTopAppBar(
 
@@ -77,7 +77,7 @@ fun AppBar() {
 @Composable
 fun ScaffoldComposable(){
     Scaffold(
-        topBar = { AppBar() },
+        topBar = { AppBarView() },
         content = {}
     )
 }

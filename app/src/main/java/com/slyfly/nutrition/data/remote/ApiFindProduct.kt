@@ -15,7 +15,7 @@ class ApiFindProduct(val context: Context) {
     private val TAG3:String="CHECK_RESPONSE_3"
 
     private val BASE_URL="https://fr.openfoodfacts.org/"
-     fun loadProduct() {
+    fun loadProduct(onResult:(ProductResponse?)->Unit){
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -31,6 +31,7 @@ class ApiFindProduct(val context: Context) {
                 response: Response<ProductResponse>
             ) {
                 if (response.isSuccessful) {
+                    onResult(response.body())
                     val body = response.body()
                     val p = body?.product
                     val n=p?.nutriments
