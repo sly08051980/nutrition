@@ -15,7 +15,7 @@ class ApiFindProduct(val context: Context) {
     private val TAG3:String="CHECK_RESPONSE_3"
 
     private val BASE_URL="https://fr.openfoodfacts.org/"
-     fun loadProduct() {
+    fun loadProduct(onResult:(ProductResponse?)->Unit){
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -31,20 +31,21 @@ class ApiFindProduct(val context: Context) {
                 response: Response<ProductResponse>
             ) {
                 if (response.isSuccessful) {
+                    onResult(response.body())
                     val body = response.body()
                     val p = body?.product
                     val n=p?.nutriments
 
                     Log.i(TAG3,
-                        "produit=${p?.product_name}, marque=${p?.brands}" +
+                        //"produit=${p?.product_name}, marque=${p?.brands}" +
                                 ",nom complet=${p?.abbreviated_product_name_fr}"+
                                 "Type d allergie=${p?.allergens_from_ingredients}"+
-                                "Allergie =${p?.allergens_from_user}"+"Type de plat =${p?.categories_old}"+
+                                //"Allergie =${p?.allergens_from_user}"+"Type de plat =${p?.categories_old}"+
                                 "Conservation =${p?.conservation_conditions_fr}"+
                                 "Fabrication = ${p?.countries_imported}"+
                                 "Image = ${p?.image_front_url}"
                                 +"ingredient=${p?.ingredients_text_fr}" +
-                                "nutriscrore=${p?.labels}"+
+                                "nutriscrore=${p?.nutrition_grade_fr}"+
                                 "glucides pour 100 g=${n?.carbohydrates_100g}g"+
                                 "calories=${n?.energy_kcal_100g}"+
                                 "Kjoule = ${n?.energy_kj_100g}"+

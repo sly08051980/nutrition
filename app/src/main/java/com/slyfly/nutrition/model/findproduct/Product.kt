@@ -14,7 +14,7 @@ data class Product(
     val countries_imported:String?,
     val image_front_url:String?,
     val ingredients_text_fr:String?,
-    val labels:String?,
+    val nutrition_grade_fr:String?,
     val nutriments: Nutriments?,
     val preparation_fr:String?,
     val product_quantity:Double?,

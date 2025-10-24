@@ -56,7 +56,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation ("com.google.android.gms:play-services-code-scanner:16.1.0")
+   implementation ("com.google.android.gms:play-services-code-scanner:16.1.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
@@ -66,4 +66,13 @@ dependencies {
 //Coroutine
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+
+    //pour afficher les images
+
+    implementation ("io.coil-kt:coil-compose:2.4.0")
+
+    //navigation entre les pages
+    implementation (libs.androidx.navigation.compose)
 }
