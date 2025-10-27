@@ -47,7 +47,7 @@ fun ScannerResultView(vm: ResultScannerViewModel = viewModel()) {
 
         Spacer(Modifier.height(16.dp))
 
-
+Text(text="Code Barre: ${product?._id}")
         Text(text = "Nom: ${product?.product_name} Marque: ${product?.brands}")
         Text(text = "Dénomination complète: ${product?.abbreviated_product_name_fr}")
         Text(text = "Poids: ${product?.product_quantity} ${product?.product_quantity_unit}")
@@ -63,7 +63,7 @@ fun ScannerResultView(vm: ResultScannerViewModel = viewModel()) {
            "d"->Text(text = "Nutriscore: "+(product?.nutrition_grade_fr)?.toUpperCase(Locale.ROOT), color = NutriscoreD)
            "e"->Text(text = "Nutriscore: "+(product?.nutrition_grade_fr)?.toUpperCase(Locale.ROOT), color = NutriscoreE)
        }
-        Text(text = "Nutriscore: ${product?.nutrition_grade_fr}".toUpperCase(Locale.ROOT))
+
 
         Spacer(Modifier.height(16.dp))
 

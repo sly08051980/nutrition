@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.data.remote
+package com.slyfly.nutrition.data.productscan
 
 import com.slyfly.nutrition.model.findproduct.ProductResponse
 import retrofit2.Call

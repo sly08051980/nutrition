@@ -6,3 +6,5 @@ data class ItemBody(
     val name:String,
     @DrawableRes val image:Int,
     val onClick: (() -> Unit)? = null)
+
+
