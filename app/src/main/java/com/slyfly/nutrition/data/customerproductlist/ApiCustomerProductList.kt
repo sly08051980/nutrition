@@ -1,6 +1,7 @@
 package com.slyfly.nutrition.data.customerproductlist
 
 import android.content.Context
+import android.nfc.Tag
 import android.util.Log
 import com.slyfly.nutrition.model.CustomerProductList.Category
 import com.slyfly.nutrition.model.CustomerProductList.CustomerProductListResponse
@@ -14,6 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiCustomerProductList(val context: Context) {
 
     val TAG:String="CHECK_RESPONSE_CUSTOMER"
+    val TAG1:String="CHECK_RESPONSE_CUSTOMER1"
+    val TAG2:String="CHECK_RESPONSE_CUSTOMER2"
     private val BASE_URL="https://regniersylvain.ngravecreations.com/"
 
     fun loadCustomerProductList(onResult: (List<Category>)->Unit){
@@ -45,10 +48,15 @@ class ApiCustomerProductList(val context: Context) {
 
                     val body = response.body()
 
+
                     body?.forEach{
                         cat->
                         cat.categorie?.let { Log.i(TAG, it) }
+                        cat.aliments.let { Log.i(TAG1,cat.categorie + cat.aliments.toString()) }
+
+
                     }
+
 
 
 
@@ -60,7 +68,7 @@ class ApiCustomerProductList(val context: Context) {
 
 
             override fun onFailure(call: Call<List<Category>>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message}", t)
+                Log.e(TAG1, "onFailure: ${t.message}", t)
             }
 
         })

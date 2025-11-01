@@ -1,5 +1,6 @@
 package com.slyfly.nutrition.ui.theme.view.customerproductlist
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,18 +28,17 @@ fun CustomerProductListView(
     modifier: Modifier = Modifier,
     vm: CustomerProductListViewModel = viewModel()
 ) {
+    val TAG12="TEST_RESPONSE"
     val context = LocalContext.current
 
-    // ⚡ Charger les données une seule fois
     LaunchedEffect(Unit) {
         vm.customerProductList(context) {}
     }
 
-    // Observer la liste des items affichables
     val items by vm.items.collectAsState()
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(3),
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -45,7 +46,9 @@ fun CustomerProductListView(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(items) { item ->
+
             Card(
+                onClick = { Log.i(TAG12, item.name) },
                 elevation = CardDefaults.cardElevation(4.dp),
                 modifier = Modifier.padding(4.dp)
             ) {
@@ -58,7 +61,9 @@ fun CustomerProductListView(
                     text = item.name,
                     modifier = Modifier.padding(8.dp)
                 )
+
             }
+
         }
     }
 }
