@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.data.remote
+package com.slyfly.nutrition.data.productscan
 
 import android.content.Context
 import android.util.Log

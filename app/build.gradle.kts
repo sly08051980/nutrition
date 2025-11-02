@@ -75,4 +75,5 @@ dependencies {
 
     //navigation entre les pages
     implementation (libs.androidx.navigation.compose)
+
 }

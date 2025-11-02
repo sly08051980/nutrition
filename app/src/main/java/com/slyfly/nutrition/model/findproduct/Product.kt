@@ -18,7 +18,8 @@ data class Product(
     val nutriments: Nutriments?,
     val preparation_fr:String?,
     val product_quantity:Double?,
-    val product_quantity_unit:String?
+    val product_quantity_unit:String?,
+   val _id:Long?
 )
 data class Nutriments(
     val carbohydrates_100g:Double?,

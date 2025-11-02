@@ -28,61 +28,74 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.slyfly.nutrition.data.remote.DataItemBody
+import com.slyfly.nutrition.data.DataItemBody
 import com.slyfly.nutrition.ui.theme.view.View
 
 
 @Composable
-fun BodyView(modifier: Modifier=Modifier, navController: NavHostController,
-             vm: ResultScannerViewModel) {
-    //pour passer le context
+
+fun BodyView(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    vm: ResultScannerViewModel
+) {
     val context = LocalContext.current
+    val items = DataItemBody(context).allItemBody()
+
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),modifier=modifier.fillMaxSize()
+        columns = GridCells.Fixed(2),
+        modifier = modifier
+            .fillMaxSize()
             .padding(20.dp),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
-        verticalArrangement=Arrangement.spacedBy(20.dp)
-    ) {items(
-        DataItemBody(context).allItemBody()){itemBody->
-        Surface {
-            OutlinedCard(onClick ={ if(itemBody.name=="Scanner"){
-            vm.scanAndFetchProduct(context){
-                navController.navigate(View.ScannerResult.title)
-            }}else{
-                itemBody.onClick?.invoke()
-            }
-            } ,
+        verticalArrangement = Arrangement.spacedBy(20.dp)
+    ) {
+        items(items) { itemBody ->
+            OutlinedCard(
+                onClick = {
+                    when (itemBody.name) {
+                        "Scanner" -> {
+                            vm.scanAndFetchProduct(context) {
+                                navController.navigate(View.ScannerResult.title)
+                            }
+                        }
+                        "Scanner mes Courses" -> {
+                            navController.navigate(View.CustomerProductList.title)
+                        }
+                        "Repas du Jour" -> {
+                            // plus tard
+                        }
+                    }
+                },
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                 ),
                 border = BorderStroke(1.dp, Color.Black),
                 modifier = Modifier
-                    .size(width = 100.dp, height = 100.dp)
+                    .size(width = 100.dp, height = 150.dp)
             ) {
-                Column (modifier=Modifier.fillMaxSize()
-                    .padding(10.dp),
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceBetween
-                ){
-
-                    Image(painter = painterResource(id=itemBody.image), contentDescription = "",modifier=Modifier.height(60.dp).width(60.dp))
+                ) {
+                    Image(
+                        painter = painterResource(id = itemBody.image),
+                        contentDescription = itemBody.name,
+                        modifier = Modifier
+                            .height(60.dp)
+                            .width(60.dp)
+                    )
                     Text(
                         text = itemBody.name,
-
                         textAlign = TextAlign.Center,
                     )
                 }
-
             }
         }
-
     }
-
-    }
-
 }
-
-

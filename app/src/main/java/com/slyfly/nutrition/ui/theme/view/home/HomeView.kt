@@ -17,15 +17,21 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 
 import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.ui.theme.view.View
+import com.slyfly.nutrition.ui.theme.view.customerproductlist.CustomerProductListView
+import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.CustomerProductListProductVarietyView
+import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.ui.theme.view.scanner.ScannerResultView
+import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 
 @Composable
 fun HomeView() {
     val navigationController = rememberNavController()
 
-    // On crée le ViewModel une seule fois ici et on le partage aux écrans
+
     val scannerVm: ResultScannerViewModel = viewModel()
+    val customerProductList : CustomerProductListViewModel=viewModel()
+
 
     Scaffold(
         topBar = { AppBarView() },
@@ -35,7 +41,7 @@ fun HomeView() {
             startDestination = View.HomeView.title,
             modifier = Modifier.padding(paddingValues)
         ) {
-            // Écran d'accueil (la grille avec Scanner / Liste Produit / etc.)
+            // Ecran d'accueil
             composable(View.HomeView.title) {
                 BodyView(
                     navController = navigationController,
@@ -43,10 +49,35 @@ fun HomeView() {
                 )
             }
 
-            // Écran du résultat du scan
+            // Ecran résultat du scan
             composable(View.ScannerResult.title) {
                 ScannerResultView(
                     vm = scannerVm
+                )
+            }
+            //Ecran liste produit
+            composable(View.CustomerProductList.title) {
+                // On crée le ViewModel
+
+
+                // On affiche la vue et on lui passe le ViewModel
+                CustomerProductListView(
+                    modifier = Modifier,
+                    vm = customerProductList,
+                    navController = navigationController
+                )
+            }
+            composable (View.CustomerProductListProductVariety.title){
+                CustomerProductListProductVarietyView(
+
+                    navController = navigationController,
+                    vm=customerProductList
+                )
+            }
+            composable (View.CustomerProductListProductVarietyDetail.title){
+                CustomerProductListProductVarietyDetailProductView(
+                    navController=navigationController,
+                    vm=customerProductList
                 )
             }
         }
