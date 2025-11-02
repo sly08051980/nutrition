@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.ui.theme.view.View
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.CustomerProductListView
+import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.CustomerProductListProductVarietyView
 import com.slyfly.nutrition.ui.theme.view.scanner.ScannerResultView
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
@@ -61,7 +62,15 @@ fun HomeView() {
                 // On affiche la vue et on lui passe le ViewModel
                 CustomerProductListView(
                     modifier = Modifier,
-                    vm = customerProductList
+                    vm = customerProductList,
+                    navController = navigationController
+                )
+            }
+            composable (View.CustomerProductListProductVariety.title){
+                CustomerProductListProductVarietyView(
+
+                    navController = navigationController,
+                    vm=customerProductList
                 )
             }
         }

@@ -21,11 +21,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.slyfly.nutrition.ui.theme.view.View
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 @Composable
 fun CustomerProductListView(
     modifier: Modifier = Modifier,
+    navController: NavHostController,
     vm: CustomerProductListViewModel = viewModel()
 ) {
     val TAG12="TEST_RESPONSE"
@@ -48,7 +51,10 @@ fun CustomerProductListView(
         items(items) { item ->
 
             Card(
-                onClick = { Log.i(TAG12, item.name) },
+                onClick = {
+                    vm.selectCategory(item.name)
+                    navController.navigate(View.CustomerProductListProductVariety.title)
+                },
                 elevation = CardDefaults.cardElevation(4.dp),
                 modifier = Modifier.padding(4.dp)
             ) {

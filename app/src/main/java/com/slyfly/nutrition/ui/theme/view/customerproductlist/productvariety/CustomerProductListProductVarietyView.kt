@@ -1,0 +1,67 @@
+package com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.slyfly.nutrition.data.customerproductlist.CustomerProductList
+import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
+
+@Composable
+
+fun CustomerProductListProductVarietyView(
+    modifier: Modifier=Modifier,
+    navController: NavHostController,
+    vm: CustomerProductListViewModel
+) {
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        vm.customerProductList(context){}
+    }
+    val aliments = remember(vm.rawCategories.collectAsState().value, vm.choiceName) {
+        vm.buildAlimentsForSelected(context)
+
+    }
+
+   LazyVerticalGrid(
+       columns = GridCells.Fixed(3),
+       modifier=modifier.fillMaxSize()
+           .padding(16.dp),
+       horizontalArrangement = Arrangement.spacedBy(12.dp),
+       verticalArrangement = Arrangement.spacedBy(12.dp)
+   ) {
+       items(aliments){
+           item->
+           Card (elevation = CardDefaults.cardElevation(4.dp),
+               modifier = Modifier.padding(4.dp)
+           ){
+               Image(
+                   painter = painterResource(id = item.image),
+                   contentDescription = item.name,
+                   modifier = Modifier.padding(8.dp)
+               )
+               Text(
+                   text = item.name,
+                   modifier = Modifier.padding(8.dp)
+               )
+           }
+       }
+   }
+}

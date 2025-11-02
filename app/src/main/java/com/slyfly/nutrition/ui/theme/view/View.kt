@@ -3,5 +3,6 @@ package com.slyfly.nutrition.ui.theme.view
 enum class View(val title :String) {
     HomeView(title="Home"),
     ScannerResult(title="Resultat"),
-    CustomerProductList(title="Scanner mes Courses")
+    CustomerProductList(title="Scanner mes Courses"),
+    CustomerProductListProductVariety(title = "Détail par Catégories")
 }

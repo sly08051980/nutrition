@@ -14,55 +14,65 @@ import com.slyfly.nutrition.model.CustomerProductList.Aliments
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
-
 class CustomerProductListViewModel : ViewModel() {
-val TAG = "TEST"
-    // On expose une LISTE d'items affichables (nom + drawable)
+
     private val _items = MutableStateFlow<List<ItemBody>>(emptyList())
     val items: StateFlow<List<ItemBody>> = _items
 
-    // Optionnel: si tu veux aussi garder brut les Category renvoyées par l'API
     private val _rawCategories = MutableStateFlow<List<Category>>(emptyList())
     val rawCategories: StateFlow<List<Category>> = _rawCategories
 
+    var choiceName: String? = null
+        private set
 
+    fun selectCategory(name: String) {
+        choiceName = name
+    }
+
+    var choiceAliments :String?=null
+        private set
+
+    fun selectAliment(name:String){
+        choiceName=name
+    }
 
     fun customerProductList(context: Context, onFinished: () -> Unit) {
-
         val api = ApiCustomerProductList(context)
-
         api.loadCustomerProductList { response: List<Category> ->
-            // 1. On stocke les catégories brutes si besoin ailleurs
+            // 1) on stocke les catégories brutes
             _rawCategories.value = response
 
-            // 2. On map chaque Category -> ItemBody pour l'affichage
+            // 2) on map pour afficher la grille des catégories
             val mapped = response.map { cat ->
-                val nom = cat.categorie?:"Defaut"
-
-                // essaie de trouver un drawable du même nom
+                val nom = cat.categorie ?: "Defaut"
                 val imageResId = context.resources.getIdentifier(
-                    nom?.lowercase(),
-                    "drawable",
-                    context.packageName
+                    nom.lowercase(), "drawable", context.packageName
                 )
-
-
-
                 ItemBody(
                     name = nom,
-                    image = if (imageResId != 0) imageResId else R.drawable.produitvegetal,
-                    onClick = {Log.i(TAG,nom)}
+                    image = if (imageResId != 0) imageResId else R.drawable.produitvegetal
                 )
-
-
             }
-
-            // 3. On push ça dans le StateFlow observé par l’UI
             _items.value = mapped
 
-            // 4. onFinished doit être APPELÉ, pas juste référencé
             onFinished()
         }
     }
 
+    /** Construit les items d'aliments pour la catégorie sélectionnée */
+    fun buildAlimentsForSelected(context: Context): List<ItemBody> {
+        val selected = choiceName ?: return emptyList()
+        val cat = _rawCategories.value.firstOrNull { it.categorie == selected }
+        val aliments = cat?.aliments.orEmpty()
+        return aliments.map { a ->
+          val nomAlim = a.nom?: "Défaut"
+            val imageResId = context.resources.getIdentifier(
+                nomAlim.lowercase(), "drawable", context.packageName
+            )
+            ItemBody(
+                name = nomAlim,
+                image = if (imageResId != 0) imageResId else R.drawable.produitvegetal
+            )
+        }
+    }
 }
