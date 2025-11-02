@@ -37,6 +37,7 @@ data class Aliments (
     val vitamine_b9:Double?,
     val vitamine_b12:Double?,
     val poid_unite_g:Double?,
-    val kcal_par_unite:Double?
+    val kcal_par_unite:Double?,
+    val imageResId:Int
 
 )

@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.slyfly.nutrition.data.customerproductlist.CustomerProductList
+import com.slyfly.nutrition.ui.theme.view.View
+import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 @Composable
@@ -40,6 +42,7 @@ fun CustomerProductListProductVarietyView(
 
     }
 
+
    LazyVerticalGrid(
        columns = GridCells.Fixed(3),
        modifier=modifier.fillMaxSize()
@@ -49,7 +52,12 @@ fun CustomerProductListProductVarietyView(
    ) {
        items(aliments){
            item->
-           Card (elevation = CardDefaults.cardElevation(4.dp),
+           Card (onClick = {
+               vm.selectAliment(item.name)
+               navController.navigate(View.CustomerProductListProductVarietyDetail.title)
+           },
+
+               elevation = CardDefaults.cardElevation(4.dp),
                modifier = Modifier.padding(4.dp)
            ){
                Image(

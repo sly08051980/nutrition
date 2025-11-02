@@ -27,13 +27,14 @@ class CustomerProductListViewModel : ViewModel() {
 
     fun selectCategory(name: String) {
         choiceName = name
+        choiceAliments=null
     }
 
     var choiceAliments :String?=null
         private set
 
     fun selectAliment(name:String){
-        choiceName=name
+        choiceAliments=name
     }
 
     fun customerProductList(context: Context, onFinished: () -> Unit) {
@@ -74,5 +75,13 @@ class CustomerProductListViewModel : ViewModel() {
                 image = if (imageResId != 0) imageResId else R.drawable.produitvegetal
             )
         }
+    }
+    fun buildAlimentsForSelectedAliment(context: Context): Aliments? {
+      val catName=choiceName?: return null
+        val alimName=choiceAliments ?:return null
+
+        return _rawCategories.value.firstOrNull(){
+            it.categorie ==catName
+        }?.aliments?.firstOrNull{it.nom==alimName}
     }
 }

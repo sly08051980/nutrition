@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.ui.theme.view.View
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.CustomerProductListView
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.CustomerProductListProductVarietyView
+import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.ui.theme.view.scanner.ScannerResultView
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
@@ -70,6 +71,12 @@ fun HomeView() {
                 CustomerProductListProductVarietyView(
 
                     navController = navigationController,
+                    vm=customerProductList
+                )
+            }
+            composable (View.CustomerProductListProductVarietyDetail.title){
+                CustomerProductListProductVarietyDetailProductView(
+                    navController=navigationController,
                     vm=customerProductList
                 )
             }
