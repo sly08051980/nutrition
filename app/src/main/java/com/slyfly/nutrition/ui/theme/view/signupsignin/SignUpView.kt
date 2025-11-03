@@ -1,6 +1,7 @@
 package com.slyfly.nutrition.ui.theme.view.signupsignin
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,15 +9,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +34,7 @@ import com.slyfly.nutrition.ui.theme.dancingScript
 
 @Composable
 
-fun SignUp() {
+fun SignUpView() {
     Column (modifier=Modifier.fillMaxSize()
         .background(Function().functionGradientBlueToWhite())
     ) {
@@ -42,31 +47,56 @@ fun SignUp() {
             Text(
                 text = "Bienvenue sur\nNutrition",
                 textAlign = TextAlign.Center,
-                fontSize = 40.sp,
-                lineHeight = 52.sp,
+                fontSize = 70.sp,
+                lineHeight = 62.sp,
                 fontFamily = dancingScript,
                 fontWeight = FontWeight.Normal,
 
             )
         }
         Row(modifier=Modifier.fillMaxWidth()
+
             .padding(0.dp,50.dp,0.dp,0.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-OutlinedTextField(
-    state= rememberTextFieldState(),
-    label = {Text("Email")}
-)
+            val email = rememberTextFieldState()
+
+            OutlinedTextField(
+                state = email,
+                label = { Text("Email") },
+               
+                shape = RoundedCornerShape(15.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White,
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White
+                )
+            )
         }
         Row(modifier=Modifier.fillMaxWidth()
             .padding(0.dp,30.dp,0.dp,0.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
+            val password = rememberTextFieldState()
+
             OutlinedTextField(
-                state= rememberTextFieldState(),
-                label = {Text("Password")}
+                state = password,
+                label = { Text("Mot de Passe") },
+
+                shape = RoundedCornerShape(15.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White,
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White
+                )
             )
         }
 Row (modifier=Modifier.fillMaxWidth()
@@ -92,7 +122,7 @@ Row (modifier=Modifier.fillMaxWidth()
             Text(text="Pas encore inscrit cliquez ici",
                 fontFamily = dancingScript,
                 fontWeight = FontWeight.Bold,
-                fontSize = 10.sp,
+                fontSize = 30.sp,
                 modifier=Modifier.clickable { /*TODO*/ }
             )
         }
@@ -107,7 +137,7 @@ Row (modifier=Modifier.fillMaxWidth()
 
 fun GretingSignUp(){
 NutritionTheme {
-    SignUp()
+    SignUpView()
 }
 
 }

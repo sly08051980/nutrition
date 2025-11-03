@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.view.home.HomeView
+import com.slyfly.nutrition.ui.theme.view.signupsignin.SignInView
+import com.slyfly.nutrition.ui.theme.view.signupsignin.SignUpView
 
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +26,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NutritionTheme {
-                HomeView()
+                //HomeView()
+SignUpView()
             }
         }
 

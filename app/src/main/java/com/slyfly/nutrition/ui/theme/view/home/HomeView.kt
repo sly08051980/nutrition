@@ -34,7 +34,9 @@ fun HomeView() {
 
 
     Scaffold(
-        topBar = { AppBarView() },
+        topBar = { AppBarView(
+            navController = navigationController
+        ) },
     ) { paddingValues ->
         NavHost(
             navController = navigationController,

@@ -76,4 +76,9 @@ dependencies {
     //navigation entre les pages
     implementation (libs.androidx.navigation.compose)
 
+    //pour les icones
+
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
+    implementation("androidx.compose.material:material-icons-extended")
+
 }

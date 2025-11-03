@@ -2,6 +2,7 @@ package com.slyfly.nutrition.ui.theme.view.customerproductlist
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.view.View
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
@@ -44,6 +46,7 @@ fun CustomerProductListView(
         columns = GridCells.Fixed(3),
         modifier = modifier
             .fillMaxSize()
+            .background(Function().functionGradientBlueToWhite())
             .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)

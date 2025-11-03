@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData.Item
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.slyfly.nutrition.R
+import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 @SuppressLint("RememberReturnType")
@@ -102,6 +104,7 @@ val minerauxRow= mineraux.chunked(4)
 
     val macronutrimentsRow=macronutriments.chunked(4)
    Column (modifier=Modifier.fillMaxSize()
+       .background(Function().functionGradientBlueToWhite())
        .padding(12.dp)
        .verticalScroll(rememberScrollState())){
 
