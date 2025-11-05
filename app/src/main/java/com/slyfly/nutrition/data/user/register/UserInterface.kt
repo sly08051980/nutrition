@@ -1,6 +1,6 @@
-package com.slyfly.nutrition.data.user
+package com.slyfly.nutrition.data.user.register
 
-import com.slyfly.nutrition.data.UserInfo
+import com.slyfly.nutrition.data.user.UserInfo
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -12,9 +12,4 @@ interface UserInterface {
     fun addUser(@Body userData: UserInfo): Call<UserInfo>
 
 
-}
-interface UserConnexion{
-    @POST("nutrition/connexion.php")
-    fun userConnexion(
-        @Body userConnexion:UserConnexion): Call<UserConnexion>
 }

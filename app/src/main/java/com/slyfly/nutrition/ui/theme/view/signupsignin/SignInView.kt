@@ -1,7 +1,7 @@
 package com.slyfly.nutrition.ui.theme.view.signupsignin
 
+import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,24 +22,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.dancingScript
 import com.slyfly.nutrition.ui.theme.view.View
+import com.slyfly.nutrition.viewmodel.RegisterViewModel
 
 
 @Composable
 
-fun SignInView(navController: NavController) {
+fun SignInView(navController: NavController,vm:RegisterViewModel= viewModel()) {
+    val context = LocalContext.current
+val duration =Toast.LENGTH_LONG
     Column (modifier=Modifier.fillMaxSize()
 
         .background(Function().functionGradientBlueToWhite())
@@ -70,11 +75,13 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val firstName = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = firstName,
+                value = vm.firstName,
+                onValueChange = { vm.firstName = it },
                 label = { Text("Prénom") },
+
 
                 shape = RoundedCornerShape(15.dp),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -94,10 +101,11 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val lastName = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = lastName,
+                value=vm.lastName,
+                onValueChange = {vm.lastName=it},
                 label = { Text("Nom") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -118,10 +126,11 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val postalCode = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = postalCode,
+                value = vm.postalCode,
+                onValueChange = {vm.postalCode=it},
                 label = { Text("Code Postal") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -142,11 +151,12 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val city = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = city,
-                label = { Text("Ville") },
+                value = vm.city,
+                onValueChange = {vm.city=it},
+                label={ Text(text = "Ville") },
 
                 shape = RoundedCornerShape(15.dp),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -167,10 +177,11 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val email = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = email,
+               value = vm.email,
+                onValueChange = {vm.email=it},
                 label = { Text("Email") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -189,10 +200,11 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val password = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = password,
+                value = vm.passwords,
+                onValueChange = {vm.passwords=it},
                 label = { Text("Mot de Passe") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -211,10 +223,11 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            val confirmPassword = rememberTextFieldState()
+
 
             OutlinedTextField(
-                state = confirmPassword,
+                value = vm.confirmPasswords,
+                onValueChange = {vm.confirmPasswords=it},
                 label = { Text("Confirmez Mot de Passe") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -233,7 +246,16 @@ fun SignInView(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center){
             Button(
-                onClick = { /* TODO */ },
+                onClick = { vm.launchApi{succes->
+
+                    if (succes==true){
+                        navController.navigate(View.SignUpView.title)
+                    }else{
+                        println("echec de l inscription")
+                        Toast.makeText(context,"echec de l inscription",duration).show()
+
+                    }
+                } },
 
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary,

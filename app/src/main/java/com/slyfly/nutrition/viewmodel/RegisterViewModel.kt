@@ -1,14 +1,13 @@
 package com.slyfly.nutrition.viewmodel
 
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.slyfly.nutrition.data.UserInfo
-import com.slyfly.nutrition.data.user.ApiManager
+import com.slyfly.nutrition.data.user.UserInfo
+import com.slyfly.nutrition.data.user.register.ApiManager
 
-class Register:ViewModel() {
+class RegisterViewModel:ViewModel() {
 
     var firstName:String by mutableStateOf("")
 var lastName:String by mutableStateOf("")
@@ -16,28 +15,37 @@ var lastName:String by mutableStateOf("")
     var city:String by mutableStateOf("")
     var email:String by mutableStateOf("")
     var passwords by mutableStateOf("")
+var confirmPasswords by mutableStateOf("")
 
+    val apiService= ApiManager()
 
-    val apiService=ApiManager()
-    val userInfo=UserInfo(
-        id=null,
-        firstName=firstName,
-        lastName = "",
-        postalCode="",
-        city = "",
-        email = "",
-        passwords = ""
-    )
-
-    fun updateTextfieldValue(text:String){
-        firstName=text,
-
+    fun isValidEmailSyntax(email: String): Boolean {
+        val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+")
+        return emailRegex.matches(email)
     }
-    apiService.addUser(userInfo){
-        if (it?.id !=null){
-            it?.id = newly added user ID
+    fun launchApi(onResult: (Boolean)->Unit){
+        if (passwords !=confirmPasswords){
+            onResult(false)
+            return
+        }
+        if (isValidEmailSyntax(email)){
+
+
+val userInfo= UserInfo(
+    id=null,
+    firstName=firstName,
+    lastName=lastName,
+    postalCode=postalCode,
+    city=city,
+    email=email,
+    passwords=passwords
+)
+        apiService.addUser(userInfo){result->
+            onResult(result!=null)
+        }
         }else{
-            Toast("Impossible d'enregistrer")
+            onResult(false)
+            return
         }
     }
 }

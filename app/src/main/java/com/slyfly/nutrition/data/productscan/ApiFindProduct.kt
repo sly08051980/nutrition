@@ -21,7 +21,7 @@ class ApiFindProduct(val context: Context) {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val api = retrofit.create(ApiProducts::class.java)
+        val api = retrofit.create(ApiProductsInterface::class.java)
         val barCodeScanner= BarCodeScanner(context)
         barCodeScanner.startScanner{result ->
 

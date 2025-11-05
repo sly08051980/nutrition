@@ -19,13 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.slyfly.nutrition.data.customerproductlist.CustomerProductList
 import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.view.View
-import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.data
+package com.slyfly.nutrition.data.user
 
 data class UserInfo(
     val id:Int?=null,
@@ -13,4 +13,10 @@ data class UserInfo(
 data class UserConnexion(
     val email:String,
     val passwords: String
+)
+
+data class ConnexionResponse(
+    val success:Boolean,
+    val message:String,
+    val user:UserInfo?
 )
