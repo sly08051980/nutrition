@@ -27,14 +27,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.dancingScript
+import com.slyfly.nutrition.ui.theme.view.View
 
 
 @Composable
 
-fun SignUpView() {
+fun SignUpView(navController: NavController) {
     Column (modifier=Modifier.fillMaxSize()
         .background(Function().functionGradientBlueToWhite())
     ) {
@@ -123,7 +126,7 @@ Row (modifier=Modifier.fillMaxWidth()
                 fontFamily = dancingScript,
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
-                modifier=Modifier.clickable { /*TODO*/ }
+                modifier=Modifier.clickable { navController.navigate(View.SignInView.title) }
             )
         }
 
@@ -137,7 +140,8 @@ Row (modifier=Modifier.fillMaxWidth()
 
 fun GretingSignUp(){
 NutritionTheme {
-    SignUpView()
+    val navController = rememberNavController()
+    SignUpView(navController=navController)
 }
 
 }

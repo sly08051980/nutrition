@@ -21,6 +21,8 @@ import com.slyfly.nutrition.ui.theme.view.customerproductlist.CustomerProductLis
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.CustomerProductListProductVarietyView
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.ui.theme.view.scanner.ScannerResultView
+import com.slyfly.nutrition.ui.theme.view.signupsignin.SignInView
+import com.slyfly.nutrition.ui.theme.view.signupsignin.SignUpView
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 
@@ -80,6 +82,17 @@ fun HomeView() {
                 CustomerProductListProductVarietyDetailProductView(
                     navController=navigationController,
                     vm=customerProductList
+                )
+            }
+            composable(View.SignInView.title) {
+                SignInView(
+                    navController = navigationController
+                )
+            }
+
+            composable(View.SignUpView.title) {
+                SignUpView(
+                    navController = navigationController
                 )
             }
         }
