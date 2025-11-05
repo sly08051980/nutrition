@@ -76,7 +76,7 @@ val context = LocalContext.current
 
 
             OutlinedTextField(
-value = vm.email,
+                value = vm.email,
                 onValueChange = {vm.email=it},
                 label = { Text("Email") },
                
