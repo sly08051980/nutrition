@@ -20,3 +20,7 @@ data class ConnexionResponse(
     val message:String,
     val user:UserInfo?
 )
+data class RegisterResponse(
+    val success: Boolean,
+    val message: String
+)

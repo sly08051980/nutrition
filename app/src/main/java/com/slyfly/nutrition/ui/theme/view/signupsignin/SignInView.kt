@@ -246,13 +246,13 @@ val duration =Toast.LENGTH_LONG
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center){
             Button(
-                onClick = { vm.launchApi{succes->
+                onClick = { vm.launchApi{success,message->
 
-                    if (succes==true){
+                    if (success){
                         navController.navigate(View.SignUpView.title)
                     }else{
-                        println("echec de l inscription")
-                        Toast.makeText(context,"echec de l inscription",duration).show()
+
+                        Toast.makeText(context,message ?: "echec de l inscription",duration).show()
 
                     }
                 } },

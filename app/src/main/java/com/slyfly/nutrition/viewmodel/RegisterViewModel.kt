@@ -23,9 +23,9 @@ var confirmPasswords by mutableStateOf("")
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+")
         return emailRegex.matches(email)
     }
-    fun launchApi(onResult: (Boolean)->Unit){
+    fun launchApi(onResult: (Boolean,String)->Unit){
         if (passwords !=confirmPasswords){
-            onResult(false)
+            onResult(false,"les mots de passe ne sont pas identique")
             return
         }
         if (isValidEmailSyntax(email)){
@@ -41,11 +41,12 @@ val userInfo= UserInfo(
     passwords=passwords
 )
         apiService.addUser(userInfo){result->
-            onResult(result!=null)
+           if (result!=null && result.success){
+               onResult(true,result.message)
+           }else{
+               onResult(false,result?.message ?: "Erreur lors de l inscription")
+           }
         }
-        }else{
-            onResult(false)
-            return
         }
     }
 }

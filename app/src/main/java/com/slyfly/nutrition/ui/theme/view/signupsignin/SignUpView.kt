@@ -123,7 +123,7 @@ Row (modifier=Modifier
     Button(
         onClick = { vm.launchConnexionApi { success,message->
             if(success){
-                Toast.makeText(context,message ?:"Connexionréussit",Toast.LENGTH_LONG).show()
+                navController.navigate(View.HomeView.title)
             }else{
                 Toast.makeText(context, message ?: "Connexion échoués", Toast.LENGTH_LONG).show()
             }
