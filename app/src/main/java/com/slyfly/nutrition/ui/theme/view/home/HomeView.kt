@@ -1,18 +1,23 @@
 package com.slyfly.nutrition.ui.theme.view.home
 
 import ResultScannerViewModel
+import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 
 import androidx.navigation.compose.rememberNavController
@@ -33,17 +38,21 @@ fun HomeView() {
 
     val scannerVm: ResultScannerViewModel = viewModel()
     val customerProductList : CustomerProductListViewModel=viewModel()
-
+//pour l animation de l appbar
+    var showUserMenu by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = { AppBarView(
-            navController = navigationController
+            navController = navigationController,
+            //pour l action du click animation
+            onUserClick ={showUserMenu =!showUserMenu}
         ) },
     ) { paddingValues ->
+        Box(Modifier.padding(paddingValues)) {
         NavHost(
             navController = navigationController,
             startDestination = View.HomeView.title,
-            modifier = Modifier.padding(paddingValues)
+       //     modifier = Modifier.padding(paddingValues)
         ) {
             // Ecran d'accueil
             composable(View.HomeView.title) {
@@ -97,8 +106,21 @@ fun HomeView() {
                 )
             }
         }
+            if (showUserMenu) {
+                UserMenu(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd) // par ex., en haut à droite
+                )
+            }
+        }
+
     }
+
+
+
+
 }
+
 
 @Preview(showBackground = true)
 @Composable

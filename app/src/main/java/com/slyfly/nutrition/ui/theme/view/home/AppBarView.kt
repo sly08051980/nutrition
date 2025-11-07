@@ -46,7 +46,7 @@ import com.slyfly.nutrition.function.Function
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
-fun AppBarView( navController: NavHostController) {
+fun AppBarView( navController: NavHostController,onUserClick:()->Unit) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val canNavigateBack = navController.previousBackStackEntry != null
@@ -76,7 +76,7 @@ fun AppBarView( navController: NavHostController) {
             },
 
             actions = {
-                IconButton(onClick = { /* TODO */ }) {
+                IconButton(onClick = { onUserClick() }) {
                     Icon(
 
                         painter = painterResource(R.drawable.person),
@@ -113,7 +113,10 @@ fun ScaffoldComposable() {
     val navController = rememberNavController()
     Scaffold(
         //passe le navcontroller a l appbar
-        topBar = { AppBarView(navController) },
+        topBar = { AppBarView(
+            navController,
+            onUserClick = {}
+        ) },
         content = {  }
     )
 }
