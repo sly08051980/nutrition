@@ -81,4 +81,9 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.06.00"))
     implementation("androidx.compose.material:material-icons-extended")
 
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
+    //datastore avec Proto
+    implementation("androidx.datastore:datastore:1.1.7")
+
 }

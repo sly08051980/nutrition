@@ -12,19 +12,31 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,11 +44,14 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.slyfly.nutrition.data.ApplicationPref
 import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.dancingScript
 import com.slyfly.nutrition.ui.theme.view.View
 import com.slyfly.nutrition.viewmodel.ConnexionUserViewModel
+import com.slyfly.nutrition.viewmodel.KEY_IS_LOGGED
+import com.slyfly.nutrition.viewmodel.KEY_USER_ID
 
 
 @Composable
@@ -44,6 +59,36 @@ import com.slyfly.nutrition.viewmodel.ConnexionUserViewModel
 fun SignUpView(navController: NavController,vm:ConnexionUserViewModel= viewModel()) {
 
 val context = LocalContext.current
+    var showPassword by remember { mutableStateOf(false) }
+    val visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation()
+
+//datastore vérification
+    val appPref = remember { ApplicationPref(context) }
+
+
+    var isLoggedIn by remember { mutableStateOf<Boolean?>(null) }
+
+    // lire datastore
+    LaunchedEffect(Unit) {
+        isLoggedIn = appPref.getBooleanPref(KEY_IS_LOGGED)
+    }
+
+    // redirection vers la page home
+    LaunchedEffect(isLoggedIn) {
+        if (isLoggedIn == true) {
+            navController.navigate(View.HomeView.title) {
+                popUpTo(View.SignUpView.title) { inclusive = true }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
     Column (modifier=Modifier
         .fillMaxSize()
@@ -105,6 +150,18 @@ val context = LocalContext.current
                 label = { Text("Mot de Passe") },
 
                 shape = RoundedCornerShape(15.dp),
+                visualTransformation=visualTransformation,
+                trailingIcon = {
+                    val image=if(showPassword){
+                        Icons.Filled.Visibility
+                    }else{
+                        Icons.Filled.VisibilityOff
+                    }
+                    IconButton(onClick = {showPassword=!showPassword}) {
+                        Icon(imageVector = image, contentDescription = "bouton password visible")
+                    }
+
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.White,
                     unfocusedBorderColor = Color.White,
@@ -112,7 +169,12 @@ val context = LocalContext.current
                     unfocusedLabelColor = Color.White,
                     focusedTextColor = Color.White,
                     unfocusedTextColor = Color.White
+
+
                 )
+
+
+
             )
         }
 Row (modifier=Modifier
@@ -121,7 +183,7 @@ Row (modifier=Modifier
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.Center){
     Button(
-        onClick = { vm.launchConnexionApi { success,message->
+        onClick = { vm.launchConnexionApi(appPref) { success,message->
             if(success){
                 navController.navigate(View.HomeView.title)
             }else{

@@ -1,12 +1,12 @@
 package com.slyfly.nutrition.ui.theme.view.home
 
 
-
-
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import com.slyfly.nutrition.R
 
 
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -36,6 +36,8 @@ import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.ui.theme.view.View
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.slyfly.nutrition.function.Function
 
 
@@ -60,18 +62,30 @@ fun AppBarView( navController: NavHostController) {
                  
                 )
             },
+
             navigationIcon = {
                 if (!isHome && canNavigateBack) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Retour",
+                            contentDescription = "Back",
                             tint = Color.White
                         )
                     }
                 }
             },
 
+            actions = {
+                IconButton(onClick = { /* TODO */ }) {
+                    Icon(
+
+                        painter = painterResource(R.drawable.person),
+                        contentDescription = "signout",
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
+            },
 
 
                 modifier = Modifier.background(Function().functionGradientWhiteToBlue()),

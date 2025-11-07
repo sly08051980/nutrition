@@ -2,7 +2,7 @@ package com.slyfly.nutrition.data.productscan
 
 import android.content.Context
 import android.util.Log
-import com.slyfly.nutrition.model.barcode.BarCodeScanner
+import com.slyfly.nutrition.data.barcode.BarCodeScanner
 import com.slyfly.nutrition.model.findproduct.ProductResponse
 import retrofit2.Call
 import retrofit2.Callback

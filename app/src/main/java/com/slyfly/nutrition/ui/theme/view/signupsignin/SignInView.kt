@@ -8,24 +8,38 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,13 +58,16 @@ import com.slyfly.nutrition.viewmodel.RegisterViewModel
 
 fun SignInView(navController: NavController,vm:RegisterViewModel= viewModel()) {
     val context = LocalContext.current
+    var showPassword by remember { mutableStateOf(false) }
+    val visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation()
 val duration =Toast.LENGTH_LONG
     Column (modifier=Modifier.fillMaxSize()
 
         .background(Function().functionGradientBlueToWhite())
         .verticalScroll(rememberScrollState())
     ) {
-        Column (modifier=Modifier.padding(0.dp,0.dp,0.dp,100.dp)){
+        //imePadding pour remonter la colonne par rapport au clavier
+        Column (modifier=Modifier.padding(0.dp,0.dp,0.dp,100.dp).imePadding()){
 
 
 
@@ -79,7 +96,8 @@ val duration =Toast.LENGTH_LONG
 
             OutlinedTextField(
                 value = vm.firstName,
-                onValueChange = { vm.firstName = it },
+                onValueChange = { newValue->
+                    vm.firstName = Function().specialChar(newValue) },
                 label = { Text("Prénom") },
 
 
@@ -105,7 +123,9 @@ val duration =Toast.LENGTH_LONG
 
             OutlinedTextField(
                 value=vm.lastName,
-                onValueChange = {vm.lastName=it},
+
+                onValueChange = {newValue->
+                    vm.lastName=Function().specialChar(newValue)},
                 label = { Text("Nom") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -127,12 +147,17 @@ val duration =Toast.LENGTH_LONG
             horizontalArrangement = Arrangement.Center)
         {
 
-
+val maxChar =5
             OutlinedTextField(
                 value = vm.postalCode,
-                onValueChange = {vm.postalCode=it},
+                onValueChange ={newValue->if(newValue.length<=maxChar){
+                    vm.postalCode=newValue
+                } else{
+                    Toast.makeText(context,"Un code posta fait 5 chiffres",duration).show()
+                }} ,
+               // onValueChange = {vm.postalCode=it},
                 label = { Text("Code Postal") },
-
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 shape = RoundedCornerShape(15.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.White,
@@ -155,7 +180,8 @@ val duration =Toast.LENGTH_LONG
 
             OutlinedTextField(
                 value = vm.city,
-                onValueChange = {vm.city=it},
+                onValueChange = {newValue->
+                    vm.city=Function().specialChar(newValue)},
                 label={ Text(text = "Ville") },
 
                 shape = RoundedCornerShape(15.dp),
@@ -208,6 +234,18 @@ val duration =Toast.LENGTH_LONG
                 label = { Text("Mot de Passe") },
 
                 shape = RoundedCornerShape(15.dp),
+                visualTransformation=visualTransformation,
+                trailingIcon = {
+                    val image=if(showPassword){
+                        Icons.Filled.Visibility
+                    }else{
+                        Icons.Filled.VisibilityOff
+                    }
+                    IconButton(onClick = {showPassword=!showPassword}) {
+                        Icon(imageVector = image, contentDescription = "bouton password visible")
+                    }
+
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.White,
                     unfocusedBorderColor = Color.White,
@@ -231,6 +269,18 @@ val duration =Toast.LENGTH_LONG
                 label = { Text("Confirmez Mot de Passe") },
 
                 shape = RoundedCornerShape(15.dp),
+                visualTransformation=visualTransformation,
+                trailingIcon = {
+                    val image=if(showPassword){
+                        Icons.Filled.Visibility
+                    }else{
+                        Icons.Filled.VisibilityOff
+                    }
+                    IconButton(onClick = {showPassword=!showPassword}) {
+                        Icon(imageVector = image, contentDescription = "bouton password visible")
+                    }
+
+                },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Color.White,
                     unfocusedBorderColor = Color.White,

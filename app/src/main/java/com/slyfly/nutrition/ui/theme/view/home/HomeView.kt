@@ -68,7 +68,8 @@ fun HomeView() {
                 CustomerProductListView(
                     modifier = Modifier,
                     vm = customerProductList,
-                    navController = navigationController
+                    navController = navigationController,
+                    vmScanner = scannerVm
                 )
             }
             composable (View.CustomerProductListProductVariety.title){

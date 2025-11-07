@@ -1,7 +1,7 @@
 package com.slyfly.nutrition.data.user
 
 data class UserInfo(
-    val id:Int?=null,
+    val id_users:Int?=null,
     val firstName:String,
     val lastName:String,
     val postalCode:String,

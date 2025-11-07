@@ -23,4 +23,8 @@ class Function {
         )
         return gradientBlueToWhite
     }
+    fun specialChar(char:String):String{
+        val chars = setOf('[',',','/','_', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')')
+return char.filter { it !in chars }
+    }
 }

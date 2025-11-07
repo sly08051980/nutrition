@@ -23,21 +23,25 @@ var confirmPasswords by mutableStateOf("")
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+")
         return emailRegex.matches(email)
     }
+    fun isValidPostalCode(postalCode:String):Boolean{
+       val postalCodeLength={postalCode.length==5}
+        return postalCodeLength()
+    }
     fun launchApi(onResult: (Boolean,String)->Unit){
         if (passwords !=confirmPasswords){
             onResult(false,"les mots de passe ne sont pas identique")
             return
         }
-        if (isValidEmailSyntax(email)){
+        if (isValidEmailSyntax(email) && isValidPostalCode(postalCode)){
 
 
 val userInfo= UserInfo(
-    id=null,
-    firstName=firstName,
-    lastName=lastName,
+    id_users=null,
+    firstName=firstName.trim().lowercase(),
+    lastName=lastName.trim().lowercase(),
     postalCode=postalCode,
-    city=city,
-    email=email,
+    city=city.trim().lowercase(),
+    email=email.trim().lowercase(),
     passwords=passwords
 )
         apiService.addUser(userInfo){result->
