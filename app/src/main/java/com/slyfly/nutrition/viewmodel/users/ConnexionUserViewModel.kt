@@ -1,12 +1,11 @@
-package com.slyfly.nutrition.viewmodel
+package com.slyfly.nutrition.viewmodel.users
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.slyfly.nutrition.data.ApplicationPref
+import com.slyfly.nutrition.data.datastore.ApplicationPref
 import com.slyfly.nutrition.data.user.UserConnexion
 import com.slyfly.nutrition.data.user.connexion.ApiConnexionManager
 import kotlinx.coroutines.launch
@@ -20,6 +19,8 @@ class ConnexionUserViewModel() : ViewModel() {
     var passwords: String by mutableStateOf("")
 
     private val userConnexion = ApiConnexionManager()
+
+
 
     fun isValidEmailSyntax(email: String): Boolean {
         val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+")
@@ -62,5 +63,15 @@ class ConnexionUserViewModel() : ViewModel() {
                 onResult(false, result?.message ?: "Erreur inconnue")
             }
         }
+    }
+   fun lauchDeconnexionApi(appPref: ApplicationPref, onResult: () -> Unit){
+       viewModelScope.launch {
+           appPref.saveBooleanPref(KEY_IS_LOGGED,false)
+           appPref.saveStringPref(KEY_USER_ID,"")
+           appPref.saveStringPref(KEY_USER_EMAIL,"")
+           onResult()
+       }
+
+
     }
 }

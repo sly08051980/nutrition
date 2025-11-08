@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -51,12 +50,12 @@ import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.dancingScript
 import com.slyfly.nutrition.ui.theme.view.View
-import com.slyfly.nutrition.viewmodel.RegisterViewModel
+import com.slyfly.nutrition.viewmodel.users.RegisterViewModel
 
 
 @Composable
 
-fun SignInView(navController: NavController,vm:RegisterViewModel= viewModel()) {
+fun SignInView(navController: NavController,vm: RegisterViewModel = viewModel()) {
     val context = LocalContext.current
     var showPassword by remember { mutableStateOf(false) }
     val visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation()

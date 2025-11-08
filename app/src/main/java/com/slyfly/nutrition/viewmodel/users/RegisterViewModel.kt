@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.viewmodel
+package com.slyfly.nutrition.viewmodel.users
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

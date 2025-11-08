@@ -15,8 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
 
@@ -28,6 +26,7 @@ import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.det
 import com.slyfly.nutrition.ui.theme.view.scanner.ScannerResultView
 import com.slyfly.nutrition.ui.theme.view.signupsignin.SignInView
 import com.slyfly.nutrition.ui.theme.view.signupsignin.SignUpView
+import com.slyfly.nutrition.viewmodel.users.ConnexionUserViewModel
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 
@@ -35,7 +34,7 @@ import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 fun HomeView() {
     val navigationController = rememberNavController()
 
-
+val vm: ConnexionUserViewModel = viewModel()
     val scannerVm: ResultScannerViewModel = viewModel()
     val customerProductList : CustomerProductListViewModel=viewModel()
 //pour l animation de l appbar
@@ -109,7 +108,9 @@ fun HomeView() {
             if (showUserMenu) {
                 UserMenu(
                     modifier = Modifier
-                        .align(Alignment.TopEnd) // par ex., en haut à droite
+                        .align(Alignment.TopEnd),
+                    vm = vm,
+                    navController = navigationController
                 )
             }
         }

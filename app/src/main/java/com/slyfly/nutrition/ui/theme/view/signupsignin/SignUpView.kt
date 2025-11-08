@@ -2,7 +2,6 @@ package com.slyfly.nutrition.ui.theme.view.signupsignin
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -31,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -44,19 +41,18 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.slyfly.nutrition.data.ApplicationPref
+import com.slyfly.nutrition.data.datastore.ApplicationPref
 import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.dancingScript
 import com.slyfly.nutrition.ui.theme.view.View
-import com.slyfly.nutrition.viewmodel.ConnexionUserViewModel
-import com.slyfly.nutrition.viewmodel.KEY_IS_LOGGED
-import com.slyfly.nutrition.viewmodel.KEY_USER_ID
+import com.slyfly.nutrition.viewmodel.users.ConnexionUserViewModel
+import com.slyfly.nutrition.viewmodel.users.KEY_IS_LOGGED
 
 
 @Composable
 
-fun SignUpView(navController: NavController,vm:ConnexionUserViewModel= viewModel()) {
+fun SignUpView(navController: NavController,vm: ConnexionUserViewModel = viewModel()) {
 
 val context = LocalContext.current
     var showPassword by remember { mutableStateOf(false) }

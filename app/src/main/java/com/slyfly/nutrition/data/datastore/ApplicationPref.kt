@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.data
+package com.slyfly.nutrition.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -10,31 +10,33 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+    name = "Local_datastore"
+)
 class ApplicationPref(val context : Context) {
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("Local_datastore")
+    private val dataStore: DataStore<Preferences> get()=context.dataStore
 
 
     suspend fun saveStringPref(key:String,value:String){
-        context.dataStore.edit{
+        dataStore.edit{
             it[stringPreferencesKey(key)]=value
         }
 
     }
     suspend fun saveBooleanPref(key:String,value: Boolean){
-        context.dataStore.edit{
+       dataStore.edit{
             it[booleanPreferencesKey(key)]=value
         }
     }
     suspend fun getStringPref(key: String):String?{
-        return context.dataStore.data.map {
+        return dataStore.data.map {
             it[stringPreferencesKey(key)]
         }.first()
     }
 
     suspend fun getBooleanPref(key: String):Boolean?{
-        return context.dataStore.data.map {
+        return dataStore.data.map {
             it[booleanPreferencesKey(key)]
         }.first()
     }
