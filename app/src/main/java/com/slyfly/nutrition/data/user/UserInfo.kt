@@ -24,3 +24,16 @@ data class RegisterResponse(
     val success: Boolean,
     val message: String
 )
+data class UpdateUser(
+    val id_users:Int?=null,
+    val firstName:String,
+    val lastName:String,
+    val postalCode:String,
+    val city:String,
+    val email:String,
+
+)
+data class UpdateResponse(
+    val success:Boolean,
+    val message:String
+)

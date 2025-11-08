@@ -24,8 +24,10 @@ import com.slyfly.nutrition.ui.theme.view.customerproductlist.CustomerProductLis
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.CustomerProductListProductVarietyView
 import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.ui.theme.view.scanner.ScannerResultView
-import com.slyfly.nutrition.ui.theme.view.signupsignin.SignInView
-import com.slyfly.nutrition.ui.theme.view.signupsignin.SignUpView
+
+import com.slyfly.nutrition.ui.theme.view.users.info.UpdateUserInfoView
+import com.slyfly.nutrition.ui.theme.view.users.signupsignin.SignInView
+import com.slyfly.nutrition.ui.theme.view.users.signupsignin.SignUpView
 import com.slyfly.nutrition.viewmodel.users.ConnexionUserViewModel
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
@@ -104,13 +106,19 @@ val vm: ConnexionUserViewModel = viewModel()
                     navController = navigationController
                 )
             }
+            composable(View.Update.title) {
+
+                UpdateUserInfoView(vm=vm)
+
+            }
         }
             if (showUserMenu) {
                 UserMenu(
                     modifier = Modifier
                         .align(Alignment.TopEnd),
                     vm = vm,
-                    navController = navigationController
+                    navController = navigationController,
+                    onCloseMenu = { showUserMenu = false }
                 )
             }
         }

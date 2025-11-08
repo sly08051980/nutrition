@@ -15,8 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import com.slyfly.nutrition.ui.theme.NutritionTheme
 import com.slyfly.nutrition.ui.theme.view.View
 import com.slyfly.nutrition.ui.theme.view.home.HomeView
-import com.slyfly.nutrition.ui.theme.view.signupsignin.SignInView
-import com.slyfly.nutrition.ui.theme.view.signupsignin.SignUpView
+import com.slyfly.nutrition.ui.theme.view.users.signupsignin.SignInView
+import com.slyfly.nutrition.ui.theme.view.users.signupsignin.SignUpView
 
 
 class MainActivity : ComponentActivity() {

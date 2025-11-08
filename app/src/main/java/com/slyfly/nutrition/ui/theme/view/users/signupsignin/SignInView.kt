@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.ui.theme.view.signupsignin
+package com.slyfly.nutrition.ui.theme.view.users.signupsignin
 
 import android.widget.Toast
 import androidx.compose.foundation.background

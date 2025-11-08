@@ -13,10 +13,19 @@ import kotlinx.coroutines.launch
 const val KEY_IS_LOGGED="is_logged"
 const val KEY_USER_ID="user_id"
 const val KEY_USER_EMAIL="email_id"
+const val KEY_USER_CITY="city_id"
+const val KEY_USER_POSTALCODE="postalcode_id"
+const val KEY_USER_FIRSTNAME="firstname_id"
+const val KEY_USER_LASTNAME="lastname_id"
 class ConnexionUserViewModel() : ViewModel() {
 
     var email: String by mutableStateOf("")
     var passwords: String by mutableStateOf("")
+var firstName by mutableStateOf("")
+    var lastName by mutableStateOf("")
+    var city by mutableStateOf("")
+    var postalCode by mutableStateOf("")
+    var id by mutableStateOf("")
 
     private val userConnexion = ApiConnexionManager()
 
@@ -56,6 +65,10 @@ class ConnexionUserViewModel() : ViewModel() {
                         user->
                         appPref.saveStringPref(KEY_USER_ID,user.id_users.toString())
                         appPref.saveStringPref(KEY_USER_EMAIL,user.email)
+                        appPref.saveStringPref(KEY_USER_LASTNAME,user.lastName)
+                        appPref.saveStringPref(KEY_USER_FIRSTNAME,user.firstName)
+                        appPref.saveStringPref(KEY_USER_POSTALCODE,user.postalCode)
+                        appPref.saveStringPref(KEY_USER_CITY,user.city)
                     }
                 }
                 onResult(true, result.message)
@@ -69,9 +82,33 @@ class ConnexionUserViewModel() : ViewModel() {
            appPref.saveBooleanPref(KEY_IS_LOGGED,false)
            appPref.saveStringPref(KEY_USER_ID,"")
            appPref.saveStringPref(KEY_USER_EMAIL,"")
+           appPref.saveStringPref(KEY_USER_LASTNAME,"")
+           appPref.saveStringPref(KEY_USER_FIRSTNAME,"")
+           appPref.saveStringPref(KEY_USER_POSTALCODE,"")
+           appPref.saveStringPref(KEY_USER_CITY,"")
            onResult()
        }
 
 
+
     }
+
+    fun readUserDataStore(
+        appPref: ApplicationPref,
+        onResult: () -> Unit
+    ) {
+        viewModelScope.launch {
+
+            id = appPref.getStringPref(KEY_USER_ID)?:""
+            email = appPref.getStringPref(KEY_USER_EMAIL)?:""
+            city = appPref.getStringPref(KEY_USER_CITY)?:""
+            firstName = appPref.getStringPref(KEY_USER_FIRSTNAME)?:""
+            lastName = appPref.getStringPref(KEY_USER_LASTNAME)?:""
+            postalCode = appPref.getStringPref(KEY_USER_POSTALCODE)?:""
+
+            onResult()
+        }
+
+    }
+
 }
