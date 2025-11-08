@@ -3,6 +3,7 @@ package com.slyfly.nutrition.ui.theme.view.home
 import ResultScannerViewModel
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.slyfly.nutrition.data.DataItemBody
+import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.view.View
 
 
@@ -48,6 +50,7 @@ fun BodyView(
         columns = GridCells.Fixed(2),
         modifier = modifier
             .fillMaxSize()
+            .background(Function().functionGradientBlueToWhite())
             .padding(20.dp),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)

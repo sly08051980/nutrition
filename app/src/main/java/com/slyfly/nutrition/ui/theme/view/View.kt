@@ -5,5 +5,8 @@ enum class View(val title :String) {
     ScannerResult(title="Resultat"),
     CustomerProductList(title="Scanner mes Courses"),
     CustomerProductListProductVariety(title = "Détail par Catégories"),
-CustomerProductListProductVarietyDetail(title="Détail produit")
+CustomerProductListProductVarietyDetail(title="Détail produit"),
+    SignUpView(title="Sign Up"),
+    SignInView(title = "Sign In"),
+    Update(title = "Info")
 }

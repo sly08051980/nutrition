@@ -1,4 +1,4 @@
-package com.slyfly.nutrition.model.barcode
+package com.slyfly.nutrition.data.barcode
 
 
 import android.content.Context

@@ -1,11 +1,28 @@
 package com.slyfly.nutrition.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.slyfly.nutrition.R
 
+val dancingScript= FontFamily(
+    Font(R.font.dancingscript_regular, weight = FontWeight.Normal),
+    Font(R.font.dancingscript_medium, weight = FontWeight.Medium),
+    Font(R.font.dancingscript_semibold, weight = FontWeight.SemiBold),
+    Font(R.font.dancingscript_bold, weight = FontWeight.Bold)
+)
+
+val TypographyDancingScript= Typography(
+    bodyLarge = TextStyle(
+        fontFamily = dancingScript,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp
+    )
+)
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(

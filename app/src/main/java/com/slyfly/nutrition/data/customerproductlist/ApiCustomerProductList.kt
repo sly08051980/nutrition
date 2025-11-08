@@ -1,10 +1,8 @@
 package com.slyfly.nutrition.data.customerproductlist
 
 import android.content.Context
-import android.nfc.Tag
 import android.util.Log
 import com.slyfly.nutrition.model.CustomerProductList.Category
-import com.slyfly.nutrition.model.CustomerProductList.CustomerProductListResponse
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +26,7 @@ class ApiCustomerProductList(val context: Context) {
 
 
 
-        val api= retrofit.create(CustomerProductList::class.java)
+        val api= retrofit.create(CustomerProductListInterface::class.java)
 
 
 

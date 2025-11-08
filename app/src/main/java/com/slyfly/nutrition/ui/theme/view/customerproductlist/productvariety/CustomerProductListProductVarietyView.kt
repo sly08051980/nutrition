@@ -1,6 +1,7 @@
 package com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,12 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.slyfly.nutrition.data.customerproductlist.CustomerProductList
+import com.slyfly.nutrition.function.Function
 import com.slyfly.nutrition.ui.theme.view.View
-import com.slyfly.nutrition.ui.theme.view.customerproductlist.productvariety.detailproduct.CustomerProductListProductVarietyDetailProductView
 import com.slyfly.nutrition.viewmodel.CustomerProductListViewModel
 
 @Composable
@@ -46,6 +44,7 @@ fun CustomerProductListProductVarietyView(
    LazyVerticalGrid(
        columns = GridCells.Fixed(3),
        modifier=modifier.fillMaxSize()
+           .background(Function().functionGradientBlueToWhite())
            .padding(16.dp),
        horizontalArrangement = Arrangement.spacedBy(12.dp),
        verticalArrangement = Arrangement.spacedBy(12.dp)
